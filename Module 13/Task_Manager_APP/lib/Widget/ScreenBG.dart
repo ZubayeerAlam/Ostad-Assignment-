@@ -13,7 +13,7 @@ class Screen_BG extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SvgPicture.asset(AssetPath.backgroundSVG),
+        SizedBox.expand(child: SvgPicture.asset(AssetPath.backgroundSVG,fit: BoxFit.cover,)),
         child,
       ],
     );
