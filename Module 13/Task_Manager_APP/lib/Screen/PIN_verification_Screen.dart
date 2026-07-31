@@ -5,6 +5,7 @@ import 'package:task_manager_app/Screen/sign_up_screen.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
 
 import '../Utils/app_colors.dart';
+import 'Set_Password_Screen.dart';
 import 'log_in_screen.dart';
 
 class Pin_verification extends StatefulWidget {
@@ -31,17 +32,96 @@ class _State extends State<Pin_verification> {
               ),
               SizedBox(height: 8),
 
-              Text("A 6 digit code will be sent to your email address for verification",style: TextStyle(color: Colors.grey.shade600),),
-              SizedBox(height: 16),
-
-              TextFormField(
-                decoration: InputDecoration(hintText: "Enter Your Email"),
+              Text(
+                "A 6 digit code will be sent to your email address for verification",
+                style: TextStyle(color: Colors.grey.shade600),
               ),
               SizedBox(height: 16),
 
+              SizedBox(
+                height: 50,
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey, width: 0),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        )
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey, width: 0),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        )
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey, width: 0),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        )
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey, width: 0),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        )
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey, width: 0),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey, width: 0),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 16),
+
               FilledButton(
-                onPressed: () {},
-                child: Icon(Icons.arrow_circle_right_outlined, size: 28),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Set_Password_Screen()));
+                },
+                child: Text("Verify",style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white
+                ),),
               ),
 
               SizedBox(height: 48),
@@ -49,26 +129,38 @@ class _State extends State<Pin_verification> {
               Center(
                 child: Column(
                   children: [
-                    RichText(text: TextSpan(
-                        text: "Have account? ",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),
+                    RichText(
+                      text: TextSpan(
+                        text: "Have account? ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
                         children: [
                           TextSpan(
-                              text: 'Sign In', style: TextStyle(
+                            text: 'Sign In',
+                            style: TextStyle(
                               color: AppColors.PColor,
-                              fontWeight: FontWeight.bold
+                              fontWeight: FontWeight.bold,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Login_Screen(),
+                                  ),
+                                );
+                              },
                           ),
-                              recognizer: TapGestureRecognizer()..onTap = () {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Login_Screen()));
-                              }
-                          )
-                        ]
-                    ))
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
-
         ),
       ),
     );
