@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/Screen/main_nav_Screen.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
 
 import '../Utils/app_colors.dart';
@@ -39,7 +40,9 @@ class _State extends State<Login_Screen> {
               SizedBox(height: 16),
 
               FilledButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainNavScreen()));
+                },
                 child: Icon(Icons.arrow_circle_right_outlined, size: 28),
               ),
 
