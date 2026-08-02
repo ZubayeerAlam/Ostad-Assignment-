@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/Data/Model/Api_response.dart';
+import 'package:task_manager_app/Data/Model/UserModel.dart';
 import 'package:task_manager_app/Screen/main_nav_Screen.dart';
 import 'package:task_manager_app/Screen/sign_up_screen.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
 
+import '../Data/Controller/auth_controller.dart';
 import '../Data/Service/Api_Caller.dart';
 import '../Utils/Urls.dart';
 import '../Utils/app_colors.dart';
@@ -31,6 +33,10 @@ class _State extends State<Login_Screen> {
       },
     );
     if (response.isSuccess) {
+      userModel model = userModel.fromJson(response.responseData['data']);
+      String token = response.responseData['token'];
+
+      AuthController.saveUserData(model, token);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => MainNavScreen()),
