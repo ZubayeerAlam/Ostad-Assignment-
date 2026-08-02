@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/Data/Model/Api_response.dart';
 import 'package:task_manager_app/Screen/main_nav_Screen.dart';
 import 'package:task_manager_app/Screen/sign_up_screen.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
 
+import '../Data/Service/Api_Caller.dart';
+import '../Utils/Urls.dart';
 import '../Utils/app_colors.dart';
 import 'Add_Email_Screen.dart';
 
@@ -16,6 +19,35 @@ class Login_Screen extends StatefulWidget {
 }
 
 class _State extends State<Login_Screen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  Future<void> signIn() async {
+    ApiResponse response = await ApiCaller.postRequest(
+      url: urls.signInURL,
+      body: {
+        'email': emailController.text,
+        'password': passwordController.text,
+      },
+    );
+    if (response.isSuccess) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MainNavScreen()),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Sign In Successful"),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(response.responseData['data'])));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +64,12 @@ class _State extends State<Login_Screen> {
               ),
               SizedBox(height: 8),
               TextFormField(
+                controller: emailController,
                 decoration: InputDecoration(hintText: "Enter Your Email"),
               ),
               SizedBox(height: 16),
               TextFormField(
+                controller: passwordController,
                 decoration: InputDecoration(hintText: "Enter Your Password"),
               ),
 
@@ -43,7 +77,7 @@ class _State extends State<Login_Screen> {
 
               FilledButton(
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainNavScreen()));
+                  signIn();
                 },
                 child: Icon(Icons.arrow_circle_right_outlined, size: 28),
               ),
@@ -53,30 +87,49 @@ class _State extends State<Login_Screen> {
               Center(
                 child: Column(
                   children: [
-                    TextButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Add_Email()));
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Add_Email()),
+                        );
+                      },
+                      child: Text(
+                        'Forget Password ?',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
 
-                    }, child: Text('Forget Password ?',style: TextStyle(color: Colors.grey),)),
-
-                    RichText(text: TextSpan(
-                        text: "Don't have an account? ",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),
+                    RichText(
+                      text: TextSpan(
+                        text: "Don't have an account? ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
                         children: [
                           TextSpan(
-                            text: 'Sign Up', style: TextStyle(
+                            text: 'Sign Up',
+                            style: TextStyle(
                               color: AppColors.PColor,
-                              fontWeight: FontWeight.bold
+                              fontWeight: FontWeight.bold,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpScreen(),
+                                ),
+                              ),
                           ),
-                          recognizer: TapGestureRecognizer()..onTap=()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen())),
-
-                          )
-                        ]
-                    ))
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
-
         ),
       ),
     );
