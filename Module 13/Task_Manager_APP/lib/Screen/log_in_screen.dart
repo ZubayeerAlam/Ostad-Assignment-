@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/Screen/main_nav_Screen.dart';
+import 'package:task_manager_app/Screen/sign_up_screen.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
 
 import '../Utils/app_colors.dart';
@@ -64,6 +66,7 @@ class _State extends State<Login_Screen> {
                               color: AppColors.PColor,
                               fontWeight: FontWeight.bold
                           ),
+                          recognizer: TapGestureRecognizer()..onTap=()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen())),
 
                           )
                         ]
