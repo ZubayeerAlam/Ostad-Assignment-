@@ -19,7 +19,7 @@ class ApiCaller {
     }
   }
 
-  static Future<ApiResponse>postRequest({required String url, required Map<String, dynamic> body}) async {
+  static Future<ApiResponse>postRequest({required String url, required Map<String, dynamic>? body}) async {
     Response response = await post(Uri.parse(url),
         headers: {
           'token' : '',
