@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
 
+import '../Data/Model/Api_response.dart';
+import '../Data/Service/Api_Caller.dart';
+import '../Utils/Urls.dart';
 import '../Utils/app_colors.dart';
 import 'Add_Email_Screen.dart';
 import 'log_in_screen.dart';
@@ -23,6 +27,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController mobileController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  Future<void> signUp() async {
+
+    final ApiResponse response = await ApiCaller.postRequest(
+      url: urls.signUPURL,
+      body: {
+        'email': emailController.text,
+        'firstName': firstNameController.text,
+        'lastName': lastNameController.text,
+        'mobile': mobileController.text,
+        'password': passwordController.text,
+      }
+    );
+
+    if (response.isSuccess) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login_Screen()));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Sign Up Successful"),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(response.responseData['data'])),
+      );
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,32 +76,64 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(hintText: "Email"),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 16),
                 TextFormField(
                   controller: firstNameController,
                   decoration: InputDecoration(hintText: "First Name"),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 16),
                 TextFormField(
                   controller: lastNameController,
                   decoration: InputDecoration(hintText: "Last Name"),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 16),
                 TextFormField(
                   controller: mobileController,
                   decoration: InputDecoration(hintText: "Mobile"),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 16),
                 TextFormField(
                   controller: passwordController,
                   decoration: InputDecoration(hintText: "Password"),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 16),
 
                 FilledButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Login_Screen()));
+                    if (fromKey.currentState!.validate()) {
+                      signUp();
+                    }
                   },
                   child: Icon(Icons.arrow_circle_right_outlined, size: 28),
                 ),
@@ -78,19 +143,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Center(
                   child: Column(
                     children: [
-                      TextButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Add_Email()));
-
-                      }, child: Text('Forget Password ?',style: TextStyle(color: Colors.grey),)),
 
                       RichText(text: TextSpan(
-                          text: "Don't have an account? ",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),
+                          text: "have an account? ",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),
                           children: [
                             TextSpan(
-                              text: 'Sign Up', style: TextStyle(
+                              text: 'Sign In', style: TextStyle(
                                 color: AppColors.PColor,
                                 fontWeight: FontWeight.bold
                             ),
+                              recognizer: TapGestureRecognizer()..onTap=()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Login_Screen())),
+
 
                             )
                           ]
