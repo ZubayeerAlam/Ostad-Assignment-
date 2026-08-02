@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager_app/Screen/NewTask_Screen.dart';
+import 'package:task_manager_app/Screen/Tasks_Screen.dart';
 
 import '../Utils/app_colors.dart';
 import '../Widget/App_Bar.dart';
-import 'Cancel_Screen.dart';
-import 'CompleteTask_Screen.dart';
-import 'ProgressTask_Screen.dart';
+import 'Categories_Screen.dart';
+import 'Calender_Screen.dart';
+import 'Profile_Screen.dart';
 
 class MainNavScreen extends StatefulWidget {
   const MainNavScreen({super.key});
@@ -16,38 +16,99 @@ class MainNavScreen extends StatefulWidget {
 }
 
 class _MainNavScreenState extends State<MainNavScreen> {
+  bool isSelected=false;
   int selectedIndex = 0;
 
-  List screens = [
-    NewtaskScreen(),
-    ProgressTaskScreen(),
-    CompleteTaskScreen(),
-    CancelScreen(),
+      List screens = [
+    TaskScreen(),
+    Profile_Screen(),
+    CalenderScreen(),
+    CategoriesScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: Appbar(),
       body: screens[selectedIndex],
-        bottomNavigationBar: NavigationBar(
-        selectedIndex: selectedIndex,
-        onDestinationSelected: (int index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        destinations: const [
-          NavigationDestination(
-              icon: Icon(Icons.task), label: 'New Task'),
-          NavigationDestination(
-              icon: Icon(Icons.refresh), label: 'Progress Task'),
-          NavigationDestination(
-              icon: Icon(Icons.task_alt_outlined), label: 'Completed Task'),
-          NavigationDestination(
-              icon: Icon(Icons.cancel_outlined), label: 'Cancel Task'),
-        ],
-      )
+        bottomNavigationBar:
+        NavigationBarTheme(
+
+          data: NavigationBarThemeData(
+            indicatorColor: Colors.green,
+            indicatorShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+
+            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
+                  (states) {
+                if (states.contains(WidgetState.selected)) {
+                  isSelected=true;
+                  return const IconThemeData(color: Colors.white);
+                }
+                isSelected=false;
+                return  IconThemeData(color: Colors.grey.shade700);
+              },
+            ),
+            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
+                  (states) {
+                if (states.contains(WidgetState.selected)) {
+                  return  TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  );
+                }
+                return TextStyle(
+                  color: Colors.grey.shade700,
+                );
+              },
+            ),
+          ),
+          child: Card(
+            child: NavigationBar(
+
+              backgroundColor: Colors.white,
+              height: 62,
+              selectedIndex: selectedIndex,
+              onDestinationSelected: (index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              destinations:  [
+                Card(
+                  color: isSelected?Colors.green:Colors.white,
+                  child: NavigationDestination(
+                    icon: Icon(Icons.task_outlined),
+                    label: 'Tasks',
+                  ),
+                ),
+                Card(
+                  color: isSelected?Colors.green:Colors.white,
+                  child: NavigationDestination(
+                    icon: Icon(Icons.category_outlined),
+                    label: 'Categories',
+                  ),
+                ),
+                Card(
+                  color: isSelected?Colors.green:Colors.white,
+                  child: NavigationDestination(
+                    icon: Icon(Icons.calendar_today_outlined),
+                    label: 'Calendar',
+                  ),
+                ),
+                Card(
+                  color: isSelected?Colors.green:Colors.white,
+                  child: NavigationDestination(
+                    icon: Icon(Icons.person_outline),
+                    label: 'Profile',
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
     );
   }
 }
