@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager_app/Screen/sign_up_screen.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
 
 import '../Utils/app_colors.dart';

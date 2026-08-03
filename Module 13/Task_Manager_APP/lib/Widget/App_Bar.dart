@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Utils/app_colors.dart';
@@ -31,7 +30,6 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  @override
   // TODO: implement child
   Widget get child => throw UnimplementedError();
 

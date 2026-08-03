@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/Screen/Tasks_Screen.dart';
 
-import '../Utils/app_colors.dart';
 import '../Widget/App_Bar.dart';
 import 'Categories_Screen.dart';
 import 'Calender_Screen.dart';
@@ -19,7 +17,7 @@ class _MainNavScreenState extends State<MainNavScreen> {
   bool isSelected=false;
   int selectedIndex = 0;
 
-      List screens = [
+  List screens = [
     TaskScreen(),
     Profile_Screen(),
     CalenderScreen(),

@@ -1,6 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 
+
+import '../Data/Model/Api_response.dart';
+import '../Data/Model/task_model.dart';
+import '../Data/Model/task_status_count_model.dart';
+import '../Data/Service/Api_Caller.dart';
+import '../Utils/Urls.dart';
 import '../Widget/taskStatus_Bycount.dart';
 
 class TaskScreen extends StatefulWidget {
@@ -12,7 +21,72 @@ class TaskScreen extends StatefulWidget {
 
 class _State extends State<TaskScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAllTaskCount();
+  }
+
+
+  List<TaskStatusCountModel> taskCount = [];
+
+  Future<void> getAllTaskCount() async {
+    final ApiResponse response = await ApiCaller.getRequest(url: urls.getTaskCountURL);
+
+    List<TaskStatusCountModel> taskC = [];
+
+    if(response.isSuccess){
+      for(Map<String , dynamic>jsonData in (response.responseData['data'])){
+        taskC.add(TaskStatusCountModel.fromJson(jsonData));
+      }
+
+      taskC.removeWhere((e)=>e.sId == null);
+
+    }else{
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        SnackBar(content: Text(response.responseData['data'])),
+      );
+    }
+    setState(() {
+      taskCount = taskC;
+    });
+
+  }
+
+
+  List<TaskModel>tasks = [];
+
+  Future<void> getAllTask() async {
+    final ApiResponse response = await ApiCaller.getRequest(url: urls.getTaskByStatusURL('New'));
+
+    List<TaskModel> task = [];
+
+
+    if(response.isSuccess){
+      for(Map<String , dynamic>jsonData in (response.responseData['data'])){
+        task.add(TaskModel.fromJson(jsonData));
+      }
+    }else{
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(SnackBar(content: Text(jsonDecode(response.responseData['data']))));
+
+    }
+
+
+    setState(() {
+      tasks = task;
+    });
+
+  }
+
+  @override
   Widget build(BuildContext context) {
+    List<String> statusOrder = [
+      'All task',
+      'Pending',
+      'In Progress',
+      'Completed'
+    ];
+
     return Scaffold(
       body: Column(
         children: [
@@ -25,10 +99,17 @@ class _State extends State<TaskScreen> {
                 itemCount: 4,
 
                 itemBuilder: (context, index) {
-                  return TaskCountByStatus(title: "new", count: 30);
+                    final status = statusOrder[index];
+
+                    final task = taskCount.firstWhere((e)=>e.sId == status, orElse: ()=> TaskStatusCountModel(
+                    sId: status,
+                    sum: 0
+                    ));
+                    return TaskCountByStatus(title: task.sId.toString(), count: task.sum ?? 0,);
+
                 },
                 separatorBuilder: (context, index) {
-                  return SizedBox(width: 28);
+                  return SizedBox(width: 6);
                 },
               ),
             ),

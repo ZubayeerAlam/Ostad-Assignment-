@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
@@ -7,7 +6,6 @@ import '../Data/Model/Api_response.dart';
 import '../Data/Service/Api_Caller.dart';
 import '../Utils/Urls.dart';
 import '../Utils/app_colors.dart';
-import 'Add_Email_Screen.dart';
 import 'log_in_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -29,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> signUp() async {
 
-    final ApiResponse response = await ApiCaller.postRequest(
+    final ApiResponse response = await ApiCaller.PostRequest(
       url: urls.signUPURL,
       body: {
         'email': emailController.text,
