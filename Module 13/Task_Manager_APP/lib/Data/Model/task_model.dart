@@ -1,35 +1,35 @@
-class userModel {
+class TaskModel {
   String? sId;
+  String? title;
+  String? description;
+  String? status;
   String? email;
-  String? firstName;
-  String? lastName;
-  String? mobile;
   String? createdDate;
 
-  userModel(
+  TaskModel(
       {this.sId,
+        this.title,
+        this.description,
+        this.status,
         this.email,
-        this.firstName,
-        this.lastName,
-        this.mobile,
         this.createdDate});
 
-  userModel.fromJson(Map<String, dynamic> json) {
+  TaskModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
+    title = json['title'];
+    description = json['description'];
+    status = json['status'];
     email = json['email'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    mobile = json['mobile'];
     createdDate = json['createdDate'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = sId;
+    data['title'] = title;
+    data['description'] = description;
+    data['status'] = status;
     data['email'] = email;
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['mobile'] = mobile;
     data['createdDate'] = createdDate;
     return data;
   }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/Data/Model/Api_response.dart';
@@ -25,7 +24,7 @@ class _State extends State<Login_Screen> {
   TextEditingController passwordController = TextEditingController();
 
   Future<void> signIn() async {
-    ApiResponse response = await ApiCaller.postRequest(
+    ApiResponse response = await ApiCaller.PostRequest(
       url: urls.signInURL,
       body: {
         'email': emailController.text,
@@ -47,10 +46,13 @@ class _State extends State<Login_Screen> {
           backgroundColor: Colors.green,
         ),
       );
-    } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(response.responseData['data'])));
+    } else if (response.isSuccess == false) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Check Your Email or Password"),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/Screen/log_in_screen.dart';
@@ -6,7 +5,6 @@ import 'package:task_manager_app/Screen/sign_up_screen.dart';
 
 import '../Utils/app_colors.dart';
 import '../Widget/ScreenBG.dart';
-import 'Add_Email_Screen.dart';
 
 class Set_Password_Screen extends StatefulWidget {
   const Set_Password_Screen({super.key});

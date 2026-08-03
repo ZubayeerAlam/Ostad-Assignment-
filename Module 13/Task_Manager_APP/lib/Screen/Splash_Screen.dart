@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
@@ -26,7 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
     MoveToNextScreen();
   }
 
-  @override
   Future MoveToNextScreen() async{
     await AuthController.getUserData();
     bool isLogin=await AuthController.isUserLogin();
