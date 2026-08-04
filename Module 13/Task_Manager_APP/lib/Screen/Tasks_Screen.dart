@@ -11,6 +11,7 @@ import '../Data/Model/task_status_count_model.dart';
 import '../Data/Service/Api_Caller.dart';
 import '../Utils/Urls.dart';
 import '../Widget/taskStatus_Bycount.dart';
+import 'Add_new_taskScreen.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
@@ -25,6 +26,7 @@ class _State extends State<TaskScreen> {
     // TODO: implement initState
     super.initState();
     getAllTaskCount();
+    getAllTask();
   }
 
 
@@ -117,11 +119,11 @@ class _State extends State<TaskScreen> {
 
           Expanded(
             child: ListView.builder(
-              itemCount: 4,
+              itemCount: tasks.length,
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                    "Task $index",
+                    tasks[index].title.toString(),
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontSize: 24,
                     ),
@@ -131,14 +133,14 @@ class _State extends State<TaskScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Task descriptionTask descriptionTask descriptionTask descriptionTask descriptionTask description",
+                        tasks[index].description.toString(),
                       ),
 
-                      Text("23-33-3333"),
+                      Text("Date: ${tasks[index].createdDate}"),
                       Row(
                         children: [
                           Chip(
-                            label: Text("New"),
+                            label: Text(tasks[index].status.toString()),
                             backgroundColor: Colors.blue,
 
                             labelStyle: TextStyle(color: Colors.white),
@@ -165,6 +167,12 @@ class _State extends State<TaskScreen> {
             ),
           ),
         ],
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddNewTaskScreen()));
+        },child: Icon(Icons.add) ,
       ),
     );
   }
