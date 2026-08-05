@@ -63,12 +63,30 @@ class _State extends State<TaskScreen> {
 
   Future<void> getAllTask() async {
     final ApiResponse response = await ApiCaller.getRequest(url: urls.getTaskByStatusURL('New'));
+    final ApiResponse responsePending = await ApiCaller.getRequest(url: urls.getTaskByStatusURL('Pending'));
+    final ApiResponse responseInProgress = await ApiCaller.getRequest(url: urls.getTaskByStatusURL('In Progress'));
+    final ApiResponse responseCompleted = await ApiCaller.getRequest(url: urls.getTaskByStatusURL('Completed'));
 
     List<TaskModel> task = [];
 
 
     if(response.isSuccess){
       for(Map<String , dynamic>jsonData in (response.responseData['data'])){
+        task.add(TaskModel.fromJson(jsonData));
+      }
+
+
+      for(Map<String , dynamic>jsonData in (responsePending.responseData['data'])){
+        task.add(TaskModel.fromJson(jsonData));
+      }
+
+
+      for(Map<String , dynamic>jsonData in (responseInProgress.responseData['data'])){
+        task.add(TaskModel.fromJson(jsonData));
+      }
+
+
+      for(Map<String , dynamic>jsonData in (responseCompleted.responseData['data'])){
         task.add(TaskModel.fromJson(jsonData));
       }
     }else{
