@@ -10,6 +10,7 @@ import '../Data/Model/task_model.dart';
 import '../Data/Model/task_status_count_model.dart';
 import '../Data/Service/Api_Caller.dart';
 import '../Utils/Urls.dart';
+import '../Widget/taskCard.dart';
 import '../Widget/taskStatus_Bycount.dart';
 import 'Add_new_taskScreen.dart';
 
@@ -31,6 +32,8 @@ class _State extends State<TaskScreen> {
 
 
   List<TaskStatusCountModel> taskCount = [];
+
+
 
   Future<void> getAllTaskCount() async {
     final ApiResponse response = await ApiCaller.getRequest(url: urls.getTaskCountURL);
@@ -98,11 +101,10 @@ class _State extends State<TaskScreen> {
               height: 88,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: 4,
+                itemCount: statusOrder.length,
 
                 itemBuilder: (context, index) {
                     final status = statusOrder[index];
-
                     final task = taskCount.firstWhere((e)=>e.sId == status, orElse: ()=> TaskStatusCountModel(
                     sId: status,
                     sum: 0
@@ -121,47 +123,13 @@ class _State extends State<TaskScreen> {
             child: ListView.builder(
               itemCount: tasks.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    tasks[index].title.toString(),
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontSize: 24,
-                    ),
-                  ),
-
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        tasks[index].description.toString(),
-                      ),
-
-                      Text("Date: ${tasks[index].createdDate}"),
-                      Row(
-                        children: [
-                          Chip(
-                            label: Text(tasks[index].status.toString()),
-                            backgroundColor: Colors.blue,
-
-                            labelStyle: TextStyle(color: Colors.white),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(22),
-                            ),
-                          ),
-                          Spacer(),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.edit_note,color: Colors.green,),
-                          ),
-
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.delete,color: Colors.red,),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                return TaskCard(
+                  taskModel: tasks[index],
+                  cardColor: Colors.blue,
+                  refresh: () async {
+                   await getAllTask();
+                   await getAllTaskCount();
+                  },
                 );
               },
             ),
