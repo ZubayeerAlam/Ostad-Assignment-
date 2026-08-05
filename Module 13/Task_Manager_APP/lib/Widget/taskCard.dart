@@ -32,6 +32,25 @@ class _TaskCardState extends State<TaskCard> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+
+              Card(
+                color: widget.taskModel.status == 'New'
+                    ? Colors.green
+                    : null,
+
+                child: ListTile(
+                  title: Text('New'),
+                  onTap: () {
+                    updateTaskStatus('New');
+                    Navigator.pop(context);
+                  },
+                  trailing: widget.taskModel.status == 'New'
+                      ? Icon(Icons.check_circle, color: Colors.white)
+                      : null,
+                ),
+              ),
+
+
               Card(
                 color: widget.taskModel.status == 'Pending'
                     ? Colors.green
