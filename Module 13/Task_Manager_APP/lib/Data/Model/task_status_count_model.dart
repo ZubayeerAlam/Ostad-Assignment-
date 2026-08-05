@@ -1,3 +1,4 @@
+
 class TaskStatusCountModel {
   String? sId;
   int? sum;
@@ -10,9 +11,9 @@ class TaskStatusCountModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
-    data['sum'] = sum;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['sum'] = this.sum;
     return data;
   }
 }
