@@ -19,9 +19,9 @@ class _MainNavScreenState extends State<MainNavScreen> {
 
   List screens = [
     TaskScreen(),
-    Profile_Screen(),
-    CalenderScreen(),
     CategoriesScreen(),
+    CalenderScreen(),
+    Profile_Screen(),
   ];
 
   @override

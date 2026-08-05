@@ -123,10 +123,23 @@ class _State extends State<TaskScreen> {
 
                 itemBuilder: (context, index) {
                     final status = statusOrder[index];
-                    final task = taskCount.firstWhere((e)=>e.sId == status, orElse: ()=> TaskStatusCountModel(
-                    sId: status,
-                    sum: 0
-                    ));
+                    // final task = taskCount.firstWhere((e)=>e.sId == status, orElse: ()=> TaskStatusCountModel(
+                    // sId: status,
+                    // sum: 0
+                    // ));
+
+                    final task = status == "All task"
+                        ? TaskStatusCountModel(
+                      sId: "All task",
+                      sum: tasks.length,
+                    )
+                        : taskCount.firstWhere(
+                          (e) => e.sId == status,
+                      orElse: () => TaskStatusCountModel(
+                        sId: status,
+                        sum: 0,
+                      ),
+                    );
                     return TaskCountByStatus(title: task.sId.toString(), count: task.sum ?? 0,);
 
                 },
@@ -143,7 +156,15 @@ class _State extends State<TaskScreen> {
               itemBuilder: (context, index) {
                 return TaskCard(
                   taskModel: tasks[index],
-                  cardColor: Colors.blue,
+                  cardColor: tasks[index].status == 'New'
+                      ? Colors.blue
+                      : tasks[index].status == 'Pending'
+                      ? Colors.orange
+                      : tasks[index].status == 'In Progress'
+                      ? Colors.purple
+                      : tasks[index].status == 'Completed'
+                      ? Colors.green
+                      : Colors.grey,
                   refresh: () async {
                    await getAllTask();
                    await getAllTaskCount();
