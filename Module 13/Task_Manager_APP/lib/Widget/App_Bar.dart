@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../Utils/app_colors.dart';
 
 class Appbar extends StatelessWidget implements PreferredSizeWidget {
-  const Appbar({super.key});
+  final String? appBarTitle;
+  final bool showSearch;
+  const Appbar({super.key, this.appBarTitle, this.showSearch = true});
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +16,17 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "All tasks",
+            appBarTitle != null ? appBarTitle! : "All task",
             style: Theme.of(
               context,
             ).textTheme.titleLarge?.copyWith(color: Colors.white, fontSize: 22),
           ),
 
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search, color: Colors.white),
-          ),
+          if (showSearch)
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.search, color: Colors.white),
+            ),
         ],
       ),
       centerTitle: false,
