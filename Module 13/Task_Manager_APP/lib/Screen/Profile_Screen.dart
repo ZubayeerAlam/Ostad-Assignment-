@@ -75,11 +75,12 @@ class _Profile_ScreenState extends State<Profile_Screen> {
   @override
   void initState() {
     super.initState();
-    if (user != null) {
-      emailController.text = user.email ?? '';
-      firstNameController.text = user.firstName ?? '';
-      lastNameController.text = user.lastName ?? '';
-      mobileController.text = user.mobile ?? '';
+    final userLocal = user; // capture to allow promotion
+    if (userLocal != null) {
+      emailController.text = userLocal.email ?? '';
+      firstNameController.text = userLocal.firstName ?? '';
+      lastNameController.text = userLocal.lastName ?? '';
+      mobileController.text = userLocal.mobile ?? '';
     } else {
       // user data not available yet — controllers remain empty
       // optionally navigate to login or fetch user data
