@@ -20,76 +20,73 @@ class Profile_Screen extends StatefulWidget {
 }
 
 class _Profile_ScreenState extends State<Profile_Screen> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> updateProfile() async {
-    Map<String, dynamic> requestBody = {
-      'email': emailController.text,
-      'firstName': firstNameController.text,
-      'lastName': lastNameController.text,
-      'mobile': mobileController.text,
+  Future<void>updateProfile() async {
+
+    Map<String,dynamic> requestBody = {
+      "email":emailController.text,
+      "firstName":firstNameController.text,
+      "lastName":lastNameController.text,
+      "mobile":mobileController.text,
     };
-    if (passwordController.text.isNotEmpty) {
+
+    if(passwordController.text.isNotEmpty){
       requestBody['password'] = passwordController.text;
     }
 
-    final ApiResponse response = await ApiCaller.PostRequest(
-      url: urls.updateProfileURL,
-      body: requestBody,
+    final ApiResponse response = await ApiCaller.PostRequest(url: urls.updateProfileURL,
+        body: requestBody
+
     );
 
-    if (response.isSuccess) {
-      userModel user = userModel.fromJson(response.responseData['data']);
+
+    if(response.isSuccess){
+      userModel user = userModel(
+        sId: AuthController.userData?.sId,
+        email: emailController.text,
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        mobile: mobileController.text,
+      );
+
       AuthController.updateUserData(user);
       AuthController.getUserData();
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Profile updated successfully'),
-          backgroundColor: Colors.green,
-        ),
-      );
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainNavScreen()));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sign up success....!')));
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainNavScreen()),
-      );
+
     }else{
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Failed to update profile'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.responseData['data'])));
+
     }
   }
-
-  userModel? user = AuthController.userData;
 
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    final userLocal = user; // capture to allow promotion
-    if (userLocal != null) {
-      emailController.text = userLocal.email ?? '';
-      firstNameController.text = userLocal.firstName ?? '';
-      lastNameController.text = userLocal.lastName ?? '';
-      mobileController.text = userLocal.mobile ?? '';
-    } else {
-      // user data not available yet — controllers remain empty
-      // optionally navigate to login or fetch user data
-    }
+    userModel user = AuthController.userData!;
+
+
+    emailController.text = user.email!;
+    firstNameController.text = user.firstName!;
+    lastNameController.text = user.lastName!;
+    mobileController.text = user.mobile!;
   }
+
   @override
   Widget build(BuildContext context) {
-    final String fullName = '${user?.firstName ?? ''} ${user?.lastName ?? ''}';
-    final String email = user?.email ?? '';
+    final String fullName = AuthController.userData!.firstName! + ' ' + AuthController.userData!.lastName!;
+    final String email = AuthController.userData!.email!;
 
 
     return Scaffold(
@@ -131,7 +128,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
             const SizedBox(height: 16),
             Form(child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              key: formKey,
+              key: formkey,
               children: [
                 Text("Email", style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,

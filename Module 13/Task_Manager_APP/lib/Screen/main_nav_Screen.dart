@@ -21,14 +21,14 @@ class _MainNavScreenState extends State<MainNavScreen> {
     TaskScreen(),
     CategoriesScreen(),
     CalenderScreen(),
-    Profile_Screen(),
+    Profile_Screen( appBarTitle: 'Profile',),
   ];
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: Appbar(),
+      appBar: selectedIndex == 3 ? null : Appbar(),
       body: screens[selectedIndex],
         bottomNavigationBar:
         NavigationBarTheme(

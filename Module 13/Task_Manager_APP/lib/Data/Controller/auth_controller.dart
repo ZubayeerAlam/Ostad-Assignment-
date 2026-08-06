@@ -4,42 +4,59 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task_manager_app/Data/Model/UserModel.dart';
 
 class AuthController {
-  static String? accessToken;
-  static String? userData;
+
+  static String ? accessToken;
+  static userModel? userData;
+
+
 
   static Future saveUserData(userModel model, String token) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString('userData', jsonEncode(model.toJson()));
-    sharedPreferences.setString('accessToken', token);
+
+    sharedPreferences.setString('token', token);
+    sharedPreferences.setString('user-data', jsonEncode(model.toJson()));
 
     accessToken = token;
-    userData = model.toJson().toString();
+    userData = model;
   }
+
 
   static Future getUserData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String ? token = sharedPreferences.getString('token');
 
-    String? user =sharedPreferences.getString('userData');
-    String? token = sharedPreferences.getString('accessToken');
+    if(token != null){
+      accessToken = token;
+    }
 
-    if(token!=null){
-      accessToken=token;
+    String ? user = sharedPreferences.getString('user-data');
+
+    if(user != null && user.isNotEmpty){
+      userData = userModel.fromJson(jsonDecode(user));
     }
-    if(user!=null && user.isNotEmpty){
-      userData=user;
-    }
+
+
+
   }
 
 
-  static Future<bool> isUserLogin() async {
+  static Future<bool> usUserLogin() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String ? token = sharedPreferences.getString('token');
 
     return token != null;
 
+
+
+
   }
 
 
+  static Future<void> updateUserData(userModel user) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
+    sharedPreferences.setString('user-data', jsonEncode(user.toJson()));
+
+  }
 
 }
