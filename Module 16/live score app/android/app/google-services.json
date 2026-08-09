@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "903668947753",
+    "project_id": "ostad-flutter-module",
+    "storage_bucket": "ostad-flutter-module.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903668947753:android:82f2e767e203df453d3538",
+        "android_client_info": {
+          "package_name": "com.example.live_score_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwrQQZ36gY6GhHA6EKshLMYS-zvlp91JA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
