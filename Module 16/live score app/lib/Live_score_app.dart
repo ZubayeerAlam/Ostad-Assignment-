@@ -8,15 +8,47 @@ class LiveScoreApp extends StatelessWidget {
       .collection('Matches')
       .doc('live_match');
 
+  // Add Run
   void addRun(int run) {
     doc.update({
       "runs": FieldValue.increment(run),
     });
   }
 
+  // Add Wicket
   void addWicket() {
     doc.update({
       "wickets": FieldValue.increment(1),
+    });
+  }
+
+  // Next Ball
+  void nextBall() {
+    doc.get().then((snapshot) {
+      final data = snapshot.data() as Map<String, dynamic>;
+
+      int balls = data['balls'] ?? 0;
+
+      balls++;
+
+      int over = balls ~/ 6;
+      int ball = balls % 6;
+
+      doc.update({
+        "balls": balls,
+        "overs": "$over.$ball",
+      });
+    });
+  }
+
+  // Reset
+  void resetScore() {
+    doc.update({
+      "runs": 0,
+      "wickets": 0,
+      "balls": 0,
+      "overs": "0.0",
+      "status": "Live",
     });
   }
 
@@ -36,6 +68,7 @@ class LiveScoreApp extends StatelessWidget {
 
           return Padding(
             padding: const EdgeInsets.all(20.0),
+
             child: Column(
               children: [
                 Text(
@@ -76,7 +109,9 @@ class LiveScoreApp extends StatelessWidget {
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
+
                   children: [
+                    // +1 Run
                     ElevatedButton(
                       onPressed: () {
                         addRun(1);
@@ -84,6 +119,7 @@ class LiveScoreApp extends StatelessWidget {
                       child: Text('+1 run'),
                     ),
 
+                    // Four
                     ElevatedButton(
                       onPressed: () {
                         addRun(4);
@@ -91,6 +127,7 @@ class LiveScoreApp extends StatelessWidget {
                       child: Text('Four'),
                     ),
 
+                    // Six
                     ElevatedButton(
                       onPressed: () {
                         addRun(6);
@@ -98,6 +135,7 @@ class LiveScoreApp extends StatelessWidget {
                       child: Text('Six'),
                     ),
 
+                    // Wicket
                     ElevatedButton(
                       onPressed: () {
                         addWicket();
@@ -105,13 +143,19 @@ class LiveScoreApp extends StatelessWidget {
                       child: Text('Wicket'),
                     ),
 
+                    // Next Ball
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        nextBall();
+                      },
                       child: Text('Next Ball'),
                     ),
 
+                    // Reset
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        resetScore();
+                      },
                       child: Text('Reset'),
                     ),
                   ],
