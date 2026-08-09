@@ -8,21 +8,18 @@ class LiveScoreApp extends StatelessWidget {
       .collection('Matches')
       .doc('live_match');
 
-  // Add Run
   void addRun(int run) {
     doc.update({
       "runs": FieldValue.increment(run),
     });
   }
 
-  // Add Wicket
   void addWicket() {
     doc.update({
       "wickets": FieldValue.increment(1),
     });
   }
 
-  // Next Ball
   void nextBall() {
     doc.get().then((snapshot) {
       final data = snapshot.data() as Map<String, dynamic>;
@@ -41,7 +38,6 @@ class LiveScoreApp extends StatelessWidget {
     });
   }
 
-  // Reset
   void resetScore() {
     doc.update({
       "runs": 0,
@@ -111,7 +107,6 @@ class LiveScoreApp extends StatelessWidget {
                   runSpacing: 10,
 
                   children: [
-                    // +1 Run
                     ElevatedButton(
                       onPressed: () {
                         addRun(1);
@@ -119,7 +114,6 @@ class LiveScoreApp extends StatelessWidget {
                       child: Text('+1 run'),
                     ),
 
-                    // Four
                     ElevatedButton(
                       onPressed: () {
                         addRun(4);
@@ -127,7 +121,6 @@ class LiveScoreApp extends StatelessWidget {
                       child: Text('Four'),
                     ),
 
-                    // Six
                     ElevatedButton(
                       onPressed: () {
                         addRun(6);
@@ -135,7 +128,6 @@ class LiveScoreApp extends StatelessWidget {
                       child: Text('Six'),
                     ),
 
-                    // Wicket
                     ElevatedButton(
                       onPressed: () {
                         addWicket();
@@ -143,7 +135,6 @@ class LiveScoreApp extends StatelessWidget {
                       child: Text('Wicket'),
                     ),
 
-                    // Next Ball
                     ElevatedButton(
                       onPressed: () {
                         nextBall();
@@ -151,7 +142,7 @@ class LiveScoreApp extends StatelessWidget {
                       child: Text('Next Ball'),
                     ),
 
-                    // Reset
+
                     ElevatedButton(
                       onPressed: () {
                         resetScore();
