@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 
 import '../Data/Controller/auth_controller.dart';
 import '../Data/Model/Api_response.dart';
 import '../Data/Model/UserModel.dart';
 import '../Data/Service/Api_Caller.dart';
+import '../Screen/log_in_screen.dart';
 import '../Utils/Urls.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -38,4 +40,24 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+
+  Future<bool> signUp(String email, String firstName, String lastName, String mobile, String password) async {
+
+    final ApiResponse response = await ApiCaller.PostRequest(
+        url: urls.signUPURL,
+        body: {
+          'email': email,
+          'firstName': firstName,
+          'lastName': lastName,
+          'mobile': mobile,
+          'password': password,
+        }
+    );
+
+    if (response.isSuccess) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
