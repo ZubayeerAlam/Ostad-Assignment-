@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_manager_app/Widget/ScreenBG.dart';
 
 import '../Data/Model/Api_response.dart';
 import '../Data/Service/Api_Caller.dart';
 import '../Utils/Urls.dart';
 import '../Utils/app_colors.dart';
+import '../providers/auth_provider.dart';
 import 'log_in_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -25,33 +27,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController mobileController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> signUp() async {
+  Future<void>signUp()async{
 
-    final ApiResponse response = await ApiCaller.PostRequest(
-      url: urls.signUPURL,
-      body: {
-        'email': emailController.text,
-        'firstName': firstNameController.text,
-        'lastName': lastNameController.text,
-        'mobile': mobileController.text,
-        'password': passwordController.text,
-      }
-    );
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    bool isLogin = await authProvider.signUp(emailController.text, firstNameController.text, lastNameController.text, mobileController.text, passwordController.text);
 
-    if (response.isSuccess) {
+    if(isLogin) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login_Screen()));
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Sign Up Successful"),
           backgroundColor: Colors.green,
         ),
+
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(response.responseData['data'])),
+        SnackBar(content: Text(authProvider.errorMassage ?? "Something went wrong")),
       );
     }
-
   }
 
   @override

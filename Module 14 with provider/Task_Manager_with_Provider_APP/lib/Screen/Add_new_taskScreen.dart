@@ -37,11 +37,12 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
     if(response.isSuccess){
 
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainNavScreen()));
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sign In success....!')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Task created successfully....!')));
 
 
     }else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.responseData['data'])));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainNavScreen()));
 
     }
   }
