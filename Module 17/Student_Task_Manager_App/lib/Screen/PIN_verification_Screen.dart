@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:student_task_manager_app/Screen/signUp_Screen.dart';
+import 'package:student_task_manager_app/Screen/Login_Screen.dart';
 import 'package:student_task_manager_app/Widget/ScreenBG.dart';
 
 import '../utils/app_colors.dart';
@@ -146,7 +146,7 @@ class _State extends State<Pin_verification> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => signUpScreen(),
+                                    builder: (context) => loginScreen(),
                                   ),
                                 );
                               },
