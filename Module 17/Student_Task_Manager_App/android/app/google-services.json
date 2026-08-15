@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "176000291447",
+    "project_id": "student-task-manager-app-2d69a",
+    "storage_bucket": "student-task-manager-app-2d69a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176000291447:android:c15b4d5d64e0ba91f0ac72",
+        "android_client_info": {
+          "package_name": "com.example.task_manager_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApYT1Ui-KLzEfuU5ozl_cdS8eI6Xf-O4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

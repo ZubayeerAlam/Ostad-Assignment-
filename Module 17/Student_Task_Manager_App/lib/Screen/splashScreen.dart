@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_task_manager_app/Screen/signUp_Screen.dart';
+import 'package:student_task_manager_app/Screen/Login_Screen.dart';
 import 'package:student_task_manager_app/Widget/screenBG.dart';
 
 
@@ -27,7 +27,7 @@ class _splashScreenState extends State<splashScreen> {
 
   Future MoveToHome() async{
     await Future.delayed(Duration(seconds: 3));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> signUpScreen()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> loginScreen()));
 
   }
 

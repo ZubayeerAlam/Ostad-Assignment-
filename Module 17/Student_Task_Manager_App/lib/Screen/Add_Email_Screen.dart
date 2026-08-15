@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:student_task_manager_app/Screen/signUp_Screen.dart';
+import 'package:student_task_manager_app/Screen/Login_Screen.dart';
 
 import '../Widget/ScreenBG.dart';
 import '../utils/app_colors.dart';
@@ -61,7 +61,7 @@ class _State extends State<Add_Email> {
                               fontWeight: FontWeight.bold
                           ),
                             recognizer: TapGestureRecognizer()..onTap = () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> signUpScreen()));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> loginScreen()));
                             }
                             )
                         ]

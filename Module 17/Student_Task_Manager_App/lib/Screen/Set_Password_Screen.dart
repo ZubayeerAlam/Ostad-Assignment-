@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:student_task_manager_app/Screen/signUp_Screen.dart';
+import 'package:student_task_manager_app/Screen/Login_Screen.dart';
 import '../Widget/ScreenBG.dart';
 import '../utils/app_colors.dart';
 
@@ -40,7 +40,7 @@ class _Set_Password_ScreenState extends State<Set_Password_Screen> {
 
               FilledButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>signUpScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>loginScreen()));
                 },
                 child: Text("Continue",style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontSize: 18,
@@ -62,7 +62,7 @@ class _Set_Password_ScreenState extends State<Set_Password_Screen> {
                               color: AppColors.PColor,
                               fontWeight: FontWeight.bold
                           ),
-                            recognizer: TapGestureRecognizer()..onTap = () => Navigator.push(context, MaterialPageRoute(builder: (context) => signUpScreen())),
+                            recognizer: TapGestureRecognizer()..onTap = () => Navigator.push(context, MaterialPageRoute(builder: (context) => loginScreen())),
 
                           )
                         ]
