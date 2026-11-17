@@ -8,8 +8,8 @@ import '../Data/Controller/auth_controller.dart';
 import '../Data/Model/Api_response.dart';
 import '../Data/Model/UserModel.dart';
 import '../Data/Service/Api_Caller.dart';
+import '../Utils/Urls.dart';
 import '../Widget/App_Bar.dart';
-import '../utils/Urls.dart';
 import 'main_nav_Screen.dart';
 
 class Profile_Screen extends StatefulWidget {

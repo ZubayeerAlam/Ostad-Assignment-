@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:student_task_manager_app/Screen/Login_Screen.dart';
+import 'package:task_manager_app/Screen/log_in_screen.dart';
+import 'package:task_manager_app/Screen/sign_up_screen.dart';
+
+import '../Utils/app_colors.dart';
 import '../Widget/ScreenBG.dart';
-import '../utils/app_colors.dart';
 
 class Set_Password_Screen extends StatefulWidget {
   const Set_Password_Screen({super.key});
@@ -15,7 +17,7 @@ class _Set_Password_ScreenState extends State<Set_Password_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screenBG(
+      body: Screen_BG(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -40,7 +42,7 @@ class _Set_Password_ScreenState extends State<Set_Password_Screen> {
 
               FilledButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>loginScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
                 },
                 child: Text("Continue",style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontSize: 18,
@@ -62,7 +64,7 @@ class _Set_Password_ScreenState extends State<Set_Password_Screen> {
                               color: AppColors.PColor,
                               fontWeight: FontWeight.bold
                           ),
-                            recognizer: TapGestureRecognizer()..onTap = () => Navigator.push(context, MaterialPageRoute(builder: (context) => loginScreen())),
+                            recognizer: TapGestureRecognizer()..onTap = () => Navigator.push(context, MaterialPageRoute(builder: (context) => Login_Screen())),
 
                           )
                         ]

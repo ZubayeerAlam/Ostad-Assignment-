@@ -1,11 +1,155 @@
-
+// import 'dart:convert';
+//
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+//
+// import '../Data/Model/Api_response.dart';
+// import '../Data/Model/task_model.dart';
+// import '../Data/Model/task_status_count_model.dart';
+// import '../Data/Service/Api_Caller.dart';
+// import '../Utils/Urls.dart';
+// import '../Widget/taskCard.dart';
+//
+// class CategoriesScreen extends StatefulWidget {
+//   const CategoriesScreen({super.key});
+//
+//   @override
+//   State<CategoriesScreen> createState() => _CategoriesScreenState();
+// }
+//
+// class _CategoriesScreenState extends State<CategoriesScreen> {
+//
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     getAllTask();
+//   }
+//
+//   List<TaskModel>tasks = [];
+//
+//
+//   Future<void> getAllTask() async {
+//     final ApiResponse response = await ApiCaller.getRequest(url: urls.getTaskByStatusURL('New'));
+//     final ApiResponse responsePending = await ApiCaller.getRequest(url: urls.getTaskByStatusURL('Pending'));
+//     final ApiResponse responseInProgress = await ApiCaller.getRequest(url: urls.getTaskByStatusURL('In Progress'));
+//     final ApiResponse responseCompleted = await ApiCaller.getRequest(url: urls.getTaskByStatusURL('Completed'));
+//
+//     List<TaskModel> allTask = [];
+//     List<TaskModel> pendingTask = [];
+//     List<TaskModel> inProgressTask = [];
+//     List<TaskModel> completedTask = [];
+//
+//
+//     if(response.isSuccess){
+//       for(Map<String , dynamic>jsonData in (response.responseData['data'])){
+//         allTask.add(TaskModel.fromJson(jsonData));
+//       }
+//
+//
+//       for(Map<String , dynamic>jsonData in (responsePending.responseData['data'])){
+//         allTask.add(TaskModel.fromJson(jsonData));
+//         pendingTask.add(TaskModel.fromJson(jsonData));
+//       }
+//
+//
+//       for(Map<String , dynamic>jsonData in (responseInProgress.responseData['data'])){
+//         allTask.add(TaskModel.fromJson(jsonData));
+//         inProgressTask.add(TaskModel.fromJson(jsonData));
+//       }
+//
+//
+//       for(Map<String , dynamic>jsonData in (responseCompleted.responseData['data'])){
+//         allTask.add(TaskModel.fromJson(jsonData));
+//         completedTask.add(TaskModel.fromJson(jsonData));
+//       }
+//     }else{
+//       ScaffoldMessenger.of(context as BuildContext).showSnackBar(SnackBar(content: Text(jsonDecode(response.responseData['data']))));
+//
+//     }
+//
+//
+//     setState(() {
+//       tasks = allTask;
+//
+//     });
+//
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//
+//     List<String> statusOrder = [
+//       'All task',
+//       'Pending',
+//       'In Progress',
+//       'Completed'
+//     ];
+//
+//     return Scaffold(
+//       body: Column(
+//         children: [
+//
+//           SizedBox(
+//             height: 42,
+//             child: Expanded(
+//               child: Row(
+//                 children: [
+//                   Expanded(
+//                     child: ListView.builder(
+//                       scrollDirection: Axis.horizontal,
+//                       itemCount: statusOrder.length,
+//                       itemBuilder: (context, index) {
+//                         final status = statusOrder[index];
+//                         final bool isSelected = selectedStatus == status;
+//
+//                         return GestureDetector(
+//                           onTap: () {
+//                             setState(() {
+//                               selectedStatus = status;
+//                             });
+//                           },
+//                           child: Padding(
+//                             padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 8),
+//                             child: Text(status),
+//                           ),
+//                         );
+//
+//                       },
+//                     ),
+//                   ),
+//                 ]
+//               ),
+//             ),
+//           ),
+//
+//
+//           Expanded(
+//             child: ListView.builder(
+//               itemCount: tasks.length,
+//               itemBuilder: (context, index) {
+//                 return TaskCard(
+//                   taskModel: tasks[index],
+//                   cardColor: Colors.blue,
+//                   refresh: () async {
+//                     await getAllTask();
+//                   },
+//                 );
+//               },
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 import 'package:flutter/material.dart';
 
 import '../Data/Model/task_model.dart';
 import '../Data/Service/Api_Caller.dart';
+import '../Utils/Urls.dart';
 import '../Widget/taskCard.dart';
-import '../utils/Urls.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});

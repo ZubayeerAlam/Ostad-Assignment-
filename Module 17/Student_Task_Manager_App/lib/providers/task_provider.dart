@@ -8,7 +8,7 @@ import '../Data/Model/Api_response.dart';
 import '../Data/Model/task_model.dart';
 import '../Data/Model/task_status_count_model.dart';
 import '../Data/Service/Api_Caller.dart';
-import '../utils/Urls.dart';
+import '../Utils/Urls.dart';
 
 class TaskProvider extends ChangeNotifier {
   bool isLoading = false;

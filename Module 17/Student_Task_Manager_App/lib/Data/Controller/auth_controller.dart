@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../Model/UserModel.dart';
+import 'package:task_manager_app/Data/Model/UserModel.dart';
 
 class AuthController {
 
