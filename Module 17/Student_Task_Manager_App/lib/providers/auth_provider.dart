@@ -6,7 +6,8 @@ import '../Data/Controller/auth_controller.dart';
 import '../Data/Model/Api_response.dart';
 import '../Data/Model/UserModel.dart';
 import '../Data/Service/Api_Caller.dart';
-import '../utils/Urls.dart';
+import '../Screen/log_in_screen.dart';
+import '../Utils/Urls.dart';
 
 class AuthProvider extends ChangeNotifier {
   bool isLogin = false;

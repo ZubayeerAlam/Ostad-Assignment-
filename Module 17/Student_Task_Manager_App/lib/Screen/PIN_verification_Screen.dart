@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:student_task_manager_app/Screen/Login_Screen.dart';
-import 'package:student_task_manager_app/Widget/ScreenBG.dart';
+import 'package:task_manager_app/Widget/ScreenBG.dart';
 
-import '../utils/app_colors.dart';
+import '../Utils/app_colors.dart';
 import 'Set_Password_Screen.dart';
+import 'log_in_screen.dart';
 
 class Pin_verification extends StatefulWidget {
   const Pin_verification({super.key});
@@ -17,7 +17,7 @@ class _State extends State<Pin_verification> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screenBG(
+      body: Screen_BG(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -146,7 +146,7 @@ class _State extends State<Pin_verification> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => loginScreen(),
+                                    builder: (context) => Login_Screen(),
                                   ),
                                 );
                               },

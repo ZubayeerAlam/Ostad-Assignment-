@@ -41,48 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCZgQa0FMzr6FcI_73jO-TFGKwwEJxIQao',
-    appId: '1:903668947753:web:2002985bcb3783d83d3538',
-    messagingSenderId: '903668947753',
-    projectId: 'ostad-flutter-module',
-    authDomain: 'ostad-flutter-module.firebaseapp.com',
-    storageBucket: 'ostad-flutter-module.firebasestorage.app',
-    measurementId: 'G-XCT3HXVQKF',
+    apiKey: 'AIzaSyDl9R_TFt9i84X1y8QhzKYzBwNvKURyzvU',
+    appId: '1:176000291447:web:004760ee02f534edf0ac72',
+    messagingSenderId: '176000291447',
+    projectId: 'student-task-manager-app-2d69a',
+    authDomain: 'student-task-manager-app-2d69a.firebaseapp.com',
+    storageBucket: 'student-task-manager-app-2d69a.firebasestorage.app',
+    measurementId: 'G-RSJFK3BYVV',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAwrQQZ36gY6GhHA6EKshLMYS-zvlp91JA',
-    appId: '1:903668947753:android:4c0b865c5bb8f32a3d3538',
-    messagingSenderId: '903668947753',
-    projectId: 'ostad-flutter-module',
-    storageBucket: 'ostad-flutter-module.firebasestorage.app',
+    apiKey: 'AIzaSyApYT1Ui-KLzEfuU5ozl_cdS8eI6Xf-O4E',
+    appId: '1:176000291447:android:c15b4d5d64e0ba91f0ac72',
+    messagingSenderId: '176000291447',
+    projectId: 'student-task-manager-app-2d69a',
+    storageBucket: 'student-task-manager-app-2d69a.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAEDMdhujlAmuUHvibVMXacvr9WYeLY-0w',
-    appId: '1:903668947753:ios:d3b4138bf02a328d3d3538',
-    messagingSenderId: '903668947753',
-    projectId: 'ostad-flutter-module',
-    storageBucket: 'ostad-flutter-module.firebasestorage.app',
-    iosBundleId: 'com.example.studentTaskManagerApp',
+    apiKey: 'AIzaSyB5rym3Km_OCzmwdQHlrJKgWgIxmfH0VyM',
+    appId: '1:176000291447:ios:de52932f94f8d57df0ac72',
+    messagingSenderId: '176000291447',
+    projectId: 'student-task-manager-app-2d69a',
+    storageBucket: 'student-task-manager-app-2d69a.firebasestorage.app',
+    iosBundleId: 'com.example.taskManagerApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAEDMdhujlAmuUHvibVMXacvr9WYeLY-0w',
-    appId: '1:903668947753:ios:d3b4138bf02a328d3d3538',
-    messagingSenderId: '903668947753',
-    projectId: 'ostad-flutter-module',
-    storageBucket: 'ostad-flutter-module.firebasestorage.app',
-    iosBundleId: 'com.example.studentTaskManagerApp',
+    apiKey: 'AIzaSyB5rym3Km_OCzmwdQHlrJKgWgIxmfH0VyM',
+    appId: '1:176000291447:ios:de52932f94f8d57df0ac72',
+    messagingSenderId: '176000291447',
+    projectId: 'student-task-manager-app-2d69a',
+    storageBucket: 'student-task-manager-app-2d69a.firebasestorage.app',
+    iosBundleId: 'com.example.taskManagerApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCZgQa0FMzr6FcI_73jO-TFGKwwEJxIQao',
-    appId: '1:903668947753:web:0f058349c3cc82133d3538',
-    messagingSenderId: '903668947753',
-    projectId: 'ostad-flutter-module',
-    authDomain: 'ostad-flutter-module.firebaseapp.com',
-    storageBucket: 'ostad-flutter-module.firebasestorage.app',
-    measurementId: 'G-REMW99WEG1',
+    apiKey: 'AIzaSyDl9R_TFt9i84X1y8QhzKYzBwNvKURyzvU',
+    appId: '1:176000291447:web:81565a6916198ffef0ac72',
+    messagingSenderId: '176000291447',
+    projectId: 'student-task-manager-app-2d69a',
+    authDomain: 'student-task-manager-app-2d69a.firebaseapp.com',
+    storageBucket: 'student-task-manager-app-2d69a.firebasestorage.app',
+    measurementId: 'G-92Z8R9BPP4',
   );
 }

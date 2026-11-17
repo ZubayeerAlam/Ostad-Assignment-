@@ -1,12 +1,10 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:student_task_manager_app/Screen/Login_Screen.dart';
+import 'package:task_manager_app/Widget/ScreenBG.dart';
 
-import '../Widget/ScreenBG.dart';
-import '../utils/app_colors.dart';
+import '../Utils/app_colors.dart';
 import 'PIN_verification_Screen.dart';
+import 'log_in_screen.dart';
 
 class Add_Email extends StatefulWidget {
   const Add_Email({super.key});
@@ -19,7 +17,7 @@ class _State extends State<Add_Email> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screenBG(
+      body: Screen_BG(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -61,7 +59,7 @@ class _State extends State<Add_Email> {
                               fontWeight: FontWeight.bold
                           ),
                             recognizer: TapGestureRecognizer()..onTap = () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> loginScreen()));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Login_Screen()));
                             }
                             )
                         ]

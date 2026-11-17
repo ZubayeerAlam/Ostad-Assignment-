@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'providers/attendance_provider.dart';
 import 'screens/attendance_screen.dart';
 
+// app started
 void main() {
   runApp(
     ChangeNotifierProvider(

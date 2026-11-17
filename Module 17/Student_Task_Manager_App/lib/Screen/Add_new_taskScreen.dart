@@ -2,12 +2,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/Utils/Urls.dart';
 
 import '../Data/Model/Api_response.dart';
 import '../Data/Service/Api_Caller.dart';
 import '../Widget/ScreenBG.dart';
 import '../Widget/taskStatus_Bycount.dart';
-import '../utils/Urls.dart';
 import 'main_nav_Screen.dart';
 
 class AddNewTaskScreen extends StatefulWidget {
@@ -51,7 +51,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: screenBG(child: Padding(
+        body: Screen_BG(child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

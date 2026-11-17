@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/Data/Model/task_model.dart';
 
 import '../Data/Model/Api_response.dart';
-import '../Data/Model/task_model.dart';
 import '../Data/Service/Api_Caller.dart';
-import '../utils/Urls.dart';
+import '../Utils/Urls.dart';
 
 class TaskCard extends StatefulWidget {
   final TaskModel taskModel;
