@@ -1,0 +1,14 @@
+# --- Secrets: never commit these (use the *.example files instead) ---
+.env
+.env.*
+!.env.example
+**/android/key.properties
+**/android/local.properties
+*.jks
+*.keystore
+**/ios/Flutter/Secrets.xcconfig
+appsettings.*.local.json
+secrets.json
+*.pem
+*.p12
+service-account*.json
