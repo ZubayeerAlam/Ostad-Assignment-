@@ -10,7 +10,7 @@ class PlaceRepository {
     : _apiServices = apiServices ?? ApiServices();
 
   Future<List<Place>> fetchNearbyGasStations(Position position) async {
-    const apiKey = 'YOUR_GOOGLE_API_KEY';
+    const apiKey = String.fromEnvironment('MAPS_API_KEY');
     final url =
         'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.latitude},${position.longitude}&radius=5000&type=gas_station&key=$apiKey';
     final data = await _apiServices.get(url);
@@ -20,7 +20,7 @@ class PlaceRepository {
   }
 
   Future<PlaceDetails> fetchGasStationDetails(String placeID) async {
-    const apiKey = 'YOUR_GOOGLE_API_KEY';
+    const apiKey = String.fromEnvironment('MAPS_API_KEY');
 
     final url =
         'https://maps.googleapis.com/maps/api/place/details/json'
